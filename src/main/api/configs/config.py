@@ -16,7 +16,7 @@ class Config:
                 for line in f:
                     if '=' in line:
                         key, value = line.split('=', 1)
-                        cls._properties[key] = value
+                        cls._properties[key.strip()] = value.strip()
         return cls._instance
 
     @staticmethod
