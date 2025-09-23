@@ -17,7 +17,9 @@ class CrudRequester(HTTPRequest, CrudEndpointInterface):
         self.request_spec.json = body
 
         with requests.Session() as session:
-            return session.send(session.prepare_request(self.request_spec))
+            response = session.send(session.prepare_request(self.request_spec))
+        self.response_spec(response)
+        return response
 
     def post(self, model: Optional[T] = None) -> requests.Response:
         body = model.model_dump() if model else ""
@@ -28,4 +30,4 @@ class CrudRequester(HTTPRequest, CrudEndpointInterface):
     def update(self, model: BaseModel, id: int): ...
 
     def delete(self, id: int) -> requests.Response:
-        return self._send_request(HTTPMethod.POST, endpoint=f"/{id}", body="")
+        return self._send_request(HTTPMethod.DELETE, endpoint=f"/{id}", body="")
