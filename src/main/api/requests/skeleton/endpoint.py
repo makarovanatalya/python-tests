@@ -2,12 +2,9 @@ from dataclasses import dataclass
 from enum import Enum
 
 from src.main.api.models.base_model import BaseModel
-from src.main.api.models.create_account_response import CreateAccountResponse
-from src.main.api.models.create_user_requests import CreateUserRequest
-from src.main.api.models.create_user_response import CreateUserResponse
-from src.main.api.models.login_user_request import LoginUserRequest
-from src.main.api.models.login_user_response import LoginUserResponse
-
+from src.main.api.models.create_account import CreateAccountResponse
+from src.main.api.models.create_user import CreateUserRequest, CreateUserResponse
+from src.main.api.models.login_user import LoginUserRequest, LoginUserResponse
 
 @dataclass(frozen=True)
 class EndpointConfig:

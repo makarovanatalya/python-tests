@@ -1,7 +1,5 @@
-from src.main.api.generators.random_model_generator import RandomModelGenerator
 from src.main.api.models.comparasion.model_assertions import ModelAssertions
-from src.main.api.models.create_user_requests import CreateUserRequest
-from src.main.api.models.create_user_response import CreateUserResponse
+from src.main.api.models.create_user import CreateUserRequest, CreateUserResponse
 from src.main.api.requests.skeleton.endpoint import Endpoint
 from src.main.api.requests.skeleton.requester.crud_requester import CrudRequester
 from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester

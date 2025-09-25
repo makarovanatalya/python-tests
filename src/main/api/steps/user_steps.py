@@ -1,8 +1,7 @@
 from src.main.api.models.comparasion.model_assertions import ModelAssertions
-from src.main.api.models.create_account_response import CreateAccountResponse
-from src.main.api.models.create_user_requests import CreateUserRequest
-from src.main.api.models.login_user_request import LoginUserRequest
-from src.main.api.models.login_user_response import LoginUserResponse
+from src.main.api.models.create_account import CreateAccountResponse
+from src.main.api.models.create_user import CreateUserRequest
+from src.main.api.models.login_user import LoginUserRequest, LoginUserResponse
 from src.main.api.requests.skeleton.endpoint import Endpoint
 from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester
 from src.main.api.specs.request_specs import RequestSpecs
