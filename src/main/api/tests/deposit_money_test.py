@@ -16,10 +16,10 @@ class TestDepositMoney:
     def test_deposit_money(self,  api_manager: ApiManager, user_request: CreateUserResponse, user_account: CreateAccountResponse):
         deposit_amount = 100.01
 
-        deposit_response = api_manager.user_steps.deposit_money(user_request.username, user_request.password, user_account.id,deposit_amount)
+        deposit_response = api_manager.user_steps.deposit_money(user_account.id,deposit_amount)
         assert user_account.balance + deposit_amount == deposit_response.balance, "Wrong balance after deposit"
 
-        account = api_manager.user_steps.get_account_by_id(user_request.username, user_request.password, user_account.id)
+        account = api_manager.user_steps.get_account_by_id(user_account.id)
         assert account.balance == user_account.balance + deposit_amount
 
         last_transaction = account.get_last_transaction()

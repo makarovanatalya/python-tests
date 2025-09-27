@@ -17,7 +17,7 @@ class AdminSteps(BaseSteps):
         ).post(user_request)
         ModelAssertions(user_request, create_user_response).match()
 
-        self.created_obejcts.append(create_user_response)
+        self.created_objects.append(create_user_response)
         return create_user_response
 
     def create_invalid_user(self, user_request: CreateUserRequest, error_key: str, error_value: str):
