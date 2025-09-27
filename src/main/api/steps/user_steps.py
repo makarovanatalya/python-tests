@@ -7,6 +7,7 @@ from src.main.api.models.create_user import CreateUserRequest
 from src.main.api.models.deposit_money import DepositMoneyResponse, DepositMoneyRequest
 from src.main.api.models.login_user import LoginUserRequest, LoginUserResponse
 from src.main.api.models.profile import ProfileRequest, ProfileResponse, Profile
+from src.main.api.models.transfer import TransferResponse, TransferRequest
 from src.main.api.requests.skeleton.endpoint import Endpoint
 from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester
 from src.main.api.specs.request_specs import RequestSpecs
@@ -19,8 +20,8 @@ class UserSteps(BaseSteps):
         super().__init__(created_object)
         self.user = None
 
-    def set_user(self, user_request: CreateUserRequest):
-        self.user = user_request
+    def set_user(self, user: CreateUserRequest):
+        self.user = user
         return self
 
     @staticmethod
@@ -63,6 +64,19 @@ class UserSteps(BaseSteps):
         ).post(model=deposit_money_request)
         ModelAssertions(deposit_money_request, deposit_money_response).match()
         return deposit_money_response
+
+    @_user_must_be_set
+    def transfer_money(self, sender_account_id: int, receiver_account_id: int, amount: float) -> TransferResponse:
+        transfer_response: TransferResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.TRANSFER,
+            request_spec=RequestSpecs.user_auth_spec(self.user.username, self.user.password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).post(model=TransferRequest(senderAccountId=sender_account_id, receiverAccountId=receiver_account_id, amount=amount))
+
+        assert transfer_response.amount == amount
+        assert transfer_response.message == "Transfer successful"
+
+        return transfer_response
 
     @_user_must_be_set
     def get_profile(self) -> Profile:
