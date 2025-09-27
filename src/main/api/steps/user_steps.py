@@ -2,6 +2,7 @@ from src.main.api.models.comparasion.model_assertions import ModelAssertions
 from src.main.api.models.create_account import CreateAccountResponse
 from src.main.api.models.create_user import CreateUserRequest
 from src.main.api.models.login_user import LoginUserRequest, LoginUserResponse
+from src.main.api.models.profile import ProfileRequest, ProfileResponse, Profile
 from src.main.api.requests.skeleton.endpoint import Endpoint
 from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester
 from src.main.api.specs.request_specs import RequestSpecs
@@ -31,3 +32,17 @@ class UserSteps(BaseSteps):
         assert create_account_response.balance == 0.0
         assert not create_account_response.transactions
         return create_account_response
+
+    def get_profile(self, username: str, password: str) -> Profile:
+        return ValidatedCrudRequester(
+            endpoint=Endpoint.GET_PROFILE,
+            request_spec=RequestSpecs.user_auth_spec(username, password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).get()
+
+    def update_profile(self, username: str, password: str, update_profile_request: ProfileRequest) -> ProfileResponse:
+        return ValidatedCrudRequester(
+            endpoint=Endpoint.UPDATE_PROFILE,
+            request_spec=RequestSpecs.user_auth_spec(username, password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).update(update_profile_request)

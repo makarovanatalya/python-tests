@@ -19,6 +19,8 @@ class ValidatedCrudRequester(HTTPRequest):
         response = self.crud_requester.get(id)
         return self.endpoint.value.response_model.model_validate(response.json())
 
-    def update(self, model: BaseModel, id: int): ...
+    def update(self, model: BaseModel, id: int = None):
+        response = self.crud_requester.update(model, id)
+        return self.endpoint.value.response_model.model_validate(response.json())
 
     def delete(self, id: int): ...

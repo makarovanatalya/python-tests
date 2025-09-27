@@ -10,7 +10,7 @@ from src.main.api.models.create_account import CreateAccountResponse
 from src.main.api.models.create_user import CreateUserRequest, CreateUserResponse
 from src.main.api.models.deposit_money import DepositMoneyRequest, DepositMoneyResponse
 from src.main.api.models.login_user import LoginUserRequest, LoginUserResponse
-from src.main.api.models.profile import ProfileRequest, ProfileResponse
+from src.main.api.models.profile import ProfileRequest, ProfileResponse, Profile
 from src.main.api.models.transfer import TransferRequest, TransferResponse
 
 
@@ -66,7 +66,7 @@ class Endpoint(Enum):
     GET_PROFILE = EndpointConfig(
         url='/customer/profile',
         request_model=None,
-        response_model=ProfileResponse,
+        response_model=Profile,
     )
 
     UPDATE_PROFILE = EndpointConfig(

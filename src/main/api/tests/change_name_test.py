@@ -1,32 +1,17 @@
 import pytest
 
-from src.main.api.models.profile import ProfileResponse
-from src.main.api.requests.skeleton.endpoint import Endpoint
-from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester
-from src.main.api.specs.request_specs import RequestSpecs
-from src.main.api.specs.response_specs import ResponseSpecs
+from src.main.api.classes.api_manager import ApiManager
+from src.main.api.models.create_user import CreateUserResponse
+from src.main.api.models.profile import ProfileRequest
 
 
 @pytest.mark.api
-class TestDepositMoney:
-    def test_deposit_money(self):
-        user_name = "user_for_tests"
-        password = "verysTRongPassword33$"
-        name = "lalala la"
+class TestChangeName:
+    @pytest.mark.parametrize("name", ("lalala la", ))
+    def test_change_name(self, api_manager: ApiManager, user_request: CreateUserResponse, name: str):
+        update_name_request = ProfileRequest(name=name)
+        change_name_response = api_manager.user_steps.update_profile(user_request.username, user_request.password, update_name_request)
+        assert change_name_response.customer.name == name
 
-        # CHANGE NAME
-        change_name_request : ProfileResponse = ValidatedCrudRequester(
-            endpoint=Endpoint.UPDATE_PROFILE,
-            request_spec=RequestSpecs.user_auth_spec(user_name, password),
-            response_spec=ResponseSpecs.request_returns_ok()
-        ).get()
-
-        assert change_name_request.name == name
-
-        get_profile_request : ProfileResponse = ValidatedCrudRequester(
-            endpoint=Endpoint.UPDATE_PROFILE,
-            request_spec=RequestSpecs.user_auth_spec(user_name, password),
-            response_spec=ResponseSpecs.request_returns_ok()
-        ).get()
-
-        assert get_profile_request.name == name
+        profile = api_manager.user_steps.get_profile(user_request.username, user_request.password)
+        assert profile.name == name
