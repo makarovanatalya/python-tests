@@ -1,5 +1,10 @@
 import pytest
-import requests
+
+from src.main.api.models.profile import ProfileResponse
+from src.main.api.requests.skeleton.endpoint import Endpoint
+from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester
+from src.main.api.specs.request_specs import RequestSpecs
+from src.main.api.specs.response_specs import ResponseSpecs
 
 
 @pytest.mark.api
@@ -10,10 +15,18 @@ class TestDepositMoney:
         name = "lalala la"
 
         # CHANGE NAME
-        response = requests.put("http://localhost:4111/api/v1/customer/profile", auth=(user_name, password), json={"name": name})
-        assert response.json()['customer']['name'] == name
+        change_name_request : ProfileResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.UPDATE_PROFILE,
+            request_spec=RequestSpecs.user_auth_spec(user_name, password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).get()
 
-        # CHECK PROFILE
-        response = requests.get("http://localhost:4111/api/v1/customer/profile", auth=(user_name, password))
-        name_after= response.json()['name']
-        assert name_after == name
+        assert change_name_request.name == name
+
+        get_profile_request : ProfileResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.UPDATE_PROFILE,
+            request_spec=RequestSpecs.user_auth_spec(user_name, password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).get()
+
+        assert get_profile_request.name == name

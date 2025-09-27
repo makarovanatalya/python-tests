@@ -11,12 +11,13 @@ class ValidatedCrudRequester(HTTPRequest):
         super().__init__(endpoint, request_spec, response_spec)
         self.crud_requester = CrudRequester(endpoint, request_spec, response_spec)
 
-    def post(self, model: Optional[T]) -> T:
+    def post(self, model: Optional[T]):
         response = self.crud_requester.post(model)
         return self.endpoint.value.response_model.model_validate(response.json())
 
-
-    def get(self, id: int): ...
+    def get(self, id: int = None):
+        response = self.crud_requester.get(id)
+        return self.endpoint.value.response_model.model_validate(response.json())
 
     def update(self, model: BaseModel, id: int): ...
 

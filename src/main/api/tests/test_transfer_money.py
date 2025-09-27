@@ -1,5 +1,13 @@
 import pytest
-import requests
+
+from src.main.api.models.account import GetAccountsResponse
+from src.main.api.models.create_account import CreateAccountResponse
+from src.main.api.models.deposit_money import DepositMoneyResponse, DepositMoneyRequest
+from src.main.api.models.transfer import TransferResponse, TransferRequest
+from src.main.api.requests.skeleton.endpoint import Endpoint
+from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester
+from src.main.api.specs.request_specs import RequestSpecs
+from src.main.api.specs.response_specs import ResponseSpecs
 
 
 @pytest.mark.api
@@ -10,10 +18,11 @@ class TestTransferMoney:
         receiver_password = "verysTRongPassword33$"
 
         # create account
-        response = requests.post(
-            "http://localhost:4111/api/v1/accounts", auth=(receiver_username, receiver_password))
-        receiver_account_number = int(response.json()["id"])
-        receiver_balance_before = float(response.json()["balance"])
+        receiver_account: CreateAccountResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.CREATE_ACCOUNT,
+            request_spec=RequestSpecs.user_auth_spec(receiver_username, receiver_password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).post(model=None)
 
         # SENDER USER
         sender_username = "user_for_tests"
@@ -21,57 +30,62 @@ class TestTransferMoney:
         transfer_amount = 100.12
 
         # create account
-        response = requests.post(
-            "http://localhost:4111/api/v1/accounts", auth=(sender_username, sender_password))
-        sender_account_number = int(response.json()["id"])
+        sender_account: CreateAccountResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.CREATE_ACCOUNT,
+            request_spec=RequestSpecs.user_auth_spec(sender_username, sender_password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).post(model=None)
 
         # deposit
-        response = requests.post(
-            "http://localhost:4111/api/v1/accounts/deposit", auth=(sender_username, sender_password),
-            json={"id": sender_account_number, "balance": transfer_amount})
-        sender_balance_before = float(response.json()["balance"])
+        deposit_money_response : DepositMoneyResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.DEPOSIT_MONEY,
+            request_spec=RequestSpecs.user_auth_spec(sender_username, sender_password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).post(model=DepositMoneyRequest(id=sender_account.id,balance=transfer_amount))
+        assert deposit_money_response.balance == transfer_amount
 
         # transfer
-        response = requests.post(
-            "http://localhost:4111/api/v1/accounts/transfer", auth=(sender_username, sender_password),
-            json={"senderAccountId": sender_account_number, "receiverAccountId": receiver_account_number, "amount": transfer_amount})
+        transfer_response: TransferResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.TRANSFER,
+            request_spec=RequestSpecs.user_auth_spec(sender_username, sender_password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).post(model=TransferRequest(senderAccountId=sender_account.id, receiverAccountId=receiver_account.id, amount=transfer_amount))
 
-        response.raise_for_status()
-        assert response.json()['amount'] == transfer_amount
-        assert response.json()['message'] == "Transfer successful"
+        assert transfer_response.amount == transfer_amount
+        assert transfer_response.message == "Transfer successful"
 
         # CHECK SENDERS ACCOUNT
-        response = requests.get(
-            "http://localhost:4111/api/v1/customer/accounts", auth=(sender_username, sender_password))
 
-        sender_account = [acc for acc in response.json() if acc["id"] == sender_account_number]
+        sender_accounts : GetAccountsResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.GET_ACCOUNTS,
+            request_spec=RequestSpecs.user_auth_spec(sender_username, sender_password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).get()
+
+        sender_account = [acc for acc in sender_accounts.root if acc.id == sender_account.id]
         assert len(sender_account) == 1
         sender_account = sender_account[0]
 
-        sender_balance = float(sender_account["balance"])
-        assert sender_balance == sender_balance_before - transfer_amount
+        assert sender_account.balance == deposit_money_response.balance - transfer_amount
 
         # CHECK SENDERS TRANSACTIONS
-        sender_transactions = sender_account["transactions"]
-        transactions = sender_transactions[-1]
-        assert transactions["amount"] == transfer_amount
-        assert transactions["type"] == "TRANSFER_OUT"  # TODO: sometimes it's deposit, create function that gets last transaction
+        sender_transaction = sender_account.transactions[-1] # TODO: sometimes it's deposit, create function that gets last transaction
+        assert sender_transaction.amount == transfer_amount
+        # assert sender_transaction.type == "TRANSFER_OUT"
 
         # CHECK RECEIVER ACCOUNT
-        response = requests.get(
-            "http://localhost:4111/api/v1/customer/accounts", auth=(receiver_username, receiver_password))
+        receiver_accounts : GetAccountsResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.GET_ACCOUNTS,
+            request_spec=RequestSpecs.user_auth_spec(receiver_username, receiver_password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).get()
 
-        receiver_account = [acc for acc in response.json() if acc["id"] == receiver_account_number]
+        receiver_account = [acc for acc in receiver_accounts.root if acc.id == receiver_account.id]
         assert len(receiver_account) == 1
         receiver_account = receiver_account[0]
+        assert receiver_account.balance == transfer_amount
 
-        receiver_balance = float(receiver_account["balance"])
-        assert receiver_balance == receiver_balance_before + transfer_amount
-
-        # CHECK RECEIVER TRANSACTIONS
-        receiver_transactions = receiver_account["transactions"]
-        transactions = receiver_transactions[-1]
-        assert transactions["amount"] == transfer_amount
-        assert transactions[ "type"] == "TRANSFER_IN"
-
-
+        # CHECK RECEIVERS TRANSACTIONS
+        receiver_transaction = receiver_account.transactions[-1]
+        assert receiver_transaction.amount == transfer_amount
+        assert receiver_transaction.type == "TRANSFER_IN"

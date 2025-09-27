@@ -1,5 +1,12 @@
 import pytest
-import requests
+
+from src.main.api.models.account import GetAccountsResponse
+from src.main.api.models.create_account import CreateAccountResponse
+from src.main.api.models.deposit_money import DepositMoneyRequest, DepositMoneyResponse
+from src.main.api.requests.skeleton.endpoint import Endpoint
+from src.main.api.requests.skeleton.requester.validated_crud_requester import ValidatedCrudRequester
+from src.main.api.specs.request_specs import RequestSpecs
+from src.main.api.specs.response_specs import ResponseSpecs
 
 
 # cases:
@@ -15,34 +22,39 @@ class TestDepositMoney:
         balance_diff = 100.01
 
         # create account
-        response = requests.post(
-            "http://localhost:4111/api/v1/accounts", auth=(user_name, password))
-        account_number = response.json()["id"]
-        balance_before = float(response.json()["balance"])
-        transaction_count_before = len(response.json()["transactions"])
+        create_account_response : CreateAccountResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.CREATE_ACCOUNT,
+            request_spec=RequestSpecs.user_auth_spec(user_name, password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).post(model=None)
 
         # deposit
-        response = requests.post(
-            "http://localhost:4111/api/v1/accounts/deposit", auth=(user_name, password),
-        json={"id": account_number, "balance": balance_diff})
-        balance_after = float(response.json()["balance"])
+        deposit_money_request : DepositMoneyRequest = DepositMoneyRequest(
+            id=create_account_response.id,
+            balance=balance_diff
+        )
+        deposit_money_response : DepositMoneyResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.DEPOSIT_MONEY,
+            request_spec=RequestSpecs.user_auth_spec(user_name, password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).post(model=deposit_money_request)
 
-        assert balance_after - balance_before == balance_diff
+        assert deposit_money_response.balance - create_account_response.balance == balance_diff
 
         # check that balance really changed
-        response = requests.get(
-            "http://localhost:4111/api/v1/customer/accounts", auth=(user_name, password))
+        get_accounts_response : GetAccountsResponse = ValidatedCrudRequester(
+            endpoint=Endpoint.GET_ACCOUNTS,
+            request_spec=RequestSpecs.user_auth_spec(user_name, password),
+            response_spec=ResponseSpecs.request_returns_ok()
+        ).get()
 
-        account = [acc for acc in response.json() if acc["id"] == account_number]
+        account = [acc for acc in get_accounts_response.root if acc.id == create_account_response.id]
         assert len(account) == 1
         account = account[0]
 
-        balance = float(account["balance"])
-        assert balance == balance_after
+        assert account.balance == create_account_response.balance + balance_diff
 
-        # check there's transaction
-        transactions = account["transactions"]
-        assert len(transactions) == transaction_count_before + 1
-        transactions = transactions[-1]
-        assert transactions["amount"] == balance_diff
-        assert transactions["type"] == "DEPOSIT"
+        assert len(account.transactions) == len(create_account_response.transactions) + 1
+        transaction = account.transactions[-1]
+        assert transaction.amount == balance_diff
+        assert transaction.type == "DEPOSIT"

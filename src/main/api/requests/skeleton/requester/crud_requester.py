@@ -11,7 +11,7 @@ from src.main.api.requests.skeleton.interfaces.crud_end_interface import CrudEnd
 T = TypeVar('T', bound=BaseModel)
 
 class CrudRequester(HTTPRequest, CrudEndpointInterface):
-    def _send_request(self, method: HTTPMethod, endpoint: str, body: str) -> requests.Response:
+    def _send_request(self, method: HTTPMethod, endpoint: str, body: str = None) -> requests.Response:
         self.request_spec.url = f"{Config.get('server')}{Config.get('api_version')}{self.endpoint.value.url}{endpoint}"
         self.request_spec.method = method
         self.request_spec.json = body
@@ -25,9 +25,14 @@ class CrudRequester(HTTPRequest, CrudEndpointInterface):
         body = model.model_dump() if model else ""
         return self._send_request(HTTPMethod.POST, endpoint="", body=body)
 
-    def get(self, model: BaseModel, id: int): ...
+    def get(self, id: Optional[int] = None):
+        endpoint = f"/{id}" if id else ""
+        return self._send_request(HTTPMethod.GET, endpoint=endpoint)
 
-    def update(self, model: BaseModel, id: int): ...
+    def update(self, model: BaseModel, id: Optional[int] = None):
+        body = model.model_dump()
+        endpoint = f"/{id}" if id else ""
+        return self._send_request(HTTPMethod.PUT, endpoint=endpoint, body=body)
 
     def delete(self, id: int) -> requests.Response:
         return self._send_request(HTTPMethod.DELETE, endpoint=f"/{id}", body="")
