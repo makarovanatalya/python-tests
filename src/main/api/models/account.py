@@ -1,7 +1,6 @@
 from typing import List, Optional
 
 from pydantic import RootModel
-from datetime import datetime
 
 from src.main.api.models.base_model import BaseModel
 from src.main.api.models.transaction import Transaction

@@ -15,7 +15,7 @@ def cleanup_objects(objects: List[Any]) -> None:
         else:
             logging.warning(f"Object {obj.id} was not deleted")
 
-@pytest.fixture()
+@pytest.fixture
 def created_objects():
     objects: List[Any] = []
     yield objects
