@@ -11,3 +11,18 @@ swagger:
 ```
 http://localhost:4111/swagger-ui/index.html
 ```
+
+to install dependencies:
+```
+pip install -r requirements.txt
+```
+
+to run all tests:
+```
+python -m pytest
+```
+
+run linter after changing the code:
+```
+ruff check .
+```

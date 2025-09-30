@@ -1,0 +1,7 @@
+exclude = [
+    "conftest.py"
+]
+
+lint.select = ["E", "F", "PT"]
+
+line-length = 140

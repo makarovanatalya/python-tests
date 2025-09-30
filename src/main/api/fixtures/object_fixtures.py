@@ -4,7 +4,7 @@ from typing import List, Any
 import pytest
 
 from src.main.api.classes.api_manager import ApiManager
-from src.main.api.models.create_user_response import CreateUserResponse
+from src.main.api.models.create_user import CreateUserResponse
 
 
 def cleanup_objects(objects: List[Any]) -> None:
@@ -15,7 +15,7 @@ def cleanup_objects(objects: List[Any]) -> None:
         else:
             logging.warning(f"Object {obj.id} was not deleted")
 
-@pytest.fixture()
+@pytest.fixture
 def created_objects():
     objects: List[Any] = []
     yield objects

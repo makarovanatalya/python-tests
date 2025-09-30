@@ -1,5 +1,5 @@
-from http import HTTPStatus
-from typing import TypeVar, Optional, Union
+from http import HTTPMethod
+from typing import TypeVar, Optional
 
 import requests
 
@@ -8,28 +8,31 @@ from src.main.api.models.base_model import BaseModel
 from src.main.api.requests.skeleton.http_request import HTTPRequest
 from src.main.api.requests.skeleton.interfaces.crud_end_interface import CrudEndpointInterface
 
-
 T = TypeVar('T', bound=BaseModel)
 
 class CrudRequester(HTTPRequest, CrudEndpointInterface):
+    def _send_request(self, method: HTTPMethod, endpoint: str, body: str = None) -> requests.Response:
+        self.request_spec.url = f"{Config.get('server')}{Config.get('api_version')}{self.endpoint.value.url}{endpoint}"
+        self.request_spec.method = method
+        self.request_spec.json = body
+
+        with requests.Session() as session:
+            response = session.send(session.prepare_request(self.request_spec))
+        self.response_spec(response)
+        return response
+
     def post(self, model: Optional[T] = None) -> requests.Response:
         body = model.model_dump() if model else ""
-        response = requests.post(
-            url = f"{Config.get('server')}{Config.get('api_version')}{self.endpoint.value.url}",
-            headers = self.request_spec,
-            json=body,
-        )
-        self.response_spec(response)
-        return response
+        return self._send_request(HTTPMethod.POST, endpoint="", body=body)
 
-    def get(self, id: int): ...
+    def get(self, id: Optional[int] = None):
+        endpoint = f"/{id}" if id else ""
+        return self._send_request(HTTPMethod.GET, endpoint=endpoint)
 
-    def update(self, model: BaseModel, id: int): ...
+    def update(self, model: BaseModel, id: Optional[int] = None):
+        body = model.model_dump()
+        endpoint = f"/{id}" if id else ""
+        return self._send_request(HTTPMethod.PUT, endpoint=endpoint, body=body)
 
     def delete(self, id: int) -> requests.Response:
-        response = requests.delete(
-            url=f"{Config.get('server')}{Config.get('api_version')}{self.endpoint.value.url}/{id}",
-            headers=self.request_spec,
-        )
-        self.response_spec(response)
-        return response
+        return self._send_request(HTTPMethod.DELETE, endpoint=f"/{id}", body="")
