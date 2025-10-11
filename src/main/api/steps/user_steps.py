@@ -134,16 +134,22 @@ class UserSteps(BaseSteps):
         ).update(update_profile_request)
 
     @_user_must_be_set
-    def get_accounts(self) -> GetAccountsResponse:
+    def get_accounts(self) -> List[Account]:
         return ValidatedCrudRequester(
             endpoint=Endpoint.GET_ACCOUNTS,
             request_spec=RequestSpecs.user_auth_spec(self.user.username, self.user.password),
             response_spec=ResponseSpecs.request_returns_ok(),
-        ).get()
+        ).get().root
 
     @_user_must_be_set
     def get_account_by_id(self, account_id: int) -> Account:
         accounts = self.get_accounts()
-        account = [acc for acc in accounts.root if acc.id == account_id]
+        account = [acc for acc in accounts if acc.id == account_id]
         assert len(account) == 1, f"Could not find account with id {account_id}"
         return account[0]
+
+    @_user_must_be_set
+    def get_account_by_account_number(self, account_number: str):
+        accounts = self.get_accounts()
+        account = [acc for acc in accounts if acc.accountNumber == account_number]
+        return account[0] if account else None

@@ -41,3 +41,8 @@ class AdminSteps(BaseSteps):
             request_spec=RequestSpecs.admin_auth_spec(),
             response_spec=ResponseSpecs.request_returns_ok(),
         ).get().root
+
+    def get_user_by_username(self, username: str):
+        users = self.get_users()
+        user = [user for user in users if user.username == username]
+        return user[0] if user else None
