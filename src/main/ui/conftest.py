@@ -3,7 +3,7 @@ from typing import Any, Generator
 import pytest
 from playwright.sync_api import Page, Browser, BrowserContext
 
-from src.main.api.configs.config import Config
+from src.main.configs.config import Config
 from src.main.api.models.create_user import CreateUserRequest
 from src.main.ui.helpers.context import add_item_to_local_storage
 

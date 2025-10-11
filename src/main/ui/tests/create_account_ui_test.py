@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from src.main.api.classes.api_manager import ApiManager
+from src.main.classes.api_manager import ApiManager
 from src.main.ui.pages.user_dashboar_page import UserDashboardPage
 
 

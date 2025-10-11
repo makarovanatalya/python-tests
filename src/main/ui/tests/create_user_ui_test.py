@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import expect
 
-from src.main.api.classes.api_manager import ApiManager
+from src.main.classes.api_manager import ApiManager
 from src.main.api.generators.random_model_generator import RandomModelGenerator
 from src.main.api.models.create_user import CreateUserRequest
 from src.main.ui.pages.admin_panel_page import AdminPanelPage
@@ -19,10 +19,7 @@ class TestCreateUser:
 
         user = api_manager.admin_steps.get_user_by_username(new_user.username)
         assert user, "User was not created on BE"
-
-
-        print(len(api_manager.admin_steps.get_users()))
-        pass
+        api_manager.admin_steps.add_created_object(user)  # to delete it on cleanup
 
     def test_admin_can_not_create_user_with_invalid_data(self, new_context, new_page,  api_manager: ApiManager, admin_session):
         new_user = RandomModelGenerator.generate(CreateUserRequest)

@@ -1,6 +1,6 @@
 import pytest
 
-from src.main.api.classes.api_manager import ApiManager
+from src.main.classes.api_manager import ApiManager
 from src.main.api.generators.random_data import RandomData
 from src.main.api.models.create_user import CreateUserResponse
 from src.main.api.models.profile import ProfileRequest

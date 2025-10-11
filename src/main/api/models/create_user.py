@@ -1,7 +1,7 @@
 from typing import Annotated
 from typing import Optional, List, Dict
 
-from src.main.api.configs.config import Config
+from src.main.configs.config import Config
 from src.main.api.generators.generating_rule import GeneratingRule
 from src.main.api.models.base_model import BaseModel
 
