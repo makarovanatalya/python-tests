@@ -2,9 +2,10 @@ from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
 from playwright.sync_api import Page
-from typing import Self, TypeVar, Type
+from typing import Self, TypeVar, Type, List
 
 T = TypeVar('T', bound='BasePage')
+E = TypeVar('E', bound='BaseElement')  # noqa: F821
 
 class BasePage(ABC):
     def __init__(self, page: Page):
@@ -32,3 +33,7 @@ class BasePage(ABC):
             self.current_alert_message = dialog.value.message
             assert alert_message in self.current_alert_message
             dialog.value.accept()
+
+    @staticmethod
+    def get_page_elements(locator, page_element_class: Type[E]) -> List[E]:
+        return [page_element_class(locator) for locator in locator.all()]

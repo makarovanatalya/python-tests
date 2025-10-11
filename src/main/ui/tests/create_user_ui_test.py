@@ -1,9 +1,8 @@
 import pytest
-from playwright.sync_api import expect
 
-from src.main.classes.api_manager import ApiManager
 from src.main.api.generators.random_model_generator import RandomModelGenerator
 from src.main.api.models.create_user import CreateUserRequest
+from src.main.classes.api_manager import ApiManager
 from src.main.ui.pages.admin_panel_page import AdminPanelPage
 
 
@@ -15,7 +14,9 @@ class TestCreateUser:
 
         with admin_page.check_alert_message_and_accept("User created successfully!"):
             admin_page.create_user(new_user.username, new_user.password)
-        expect(admin_page.user_elements.filter(has_text=f"{new_user.username}USER")).to_be_visible()
+        ui_user = admin_page.find_user_by_username(new_user.username)
+        assert ui_user, "Could not find user in UI"
+        assert ui_user.role == new_user.role, "Role does not match"
 
         user = api_manager.admin_steps.get_user_by_username(new_user.username)
         assert user, "User was not created on BE"
@@ -28,7 +29,8 @@ class TestCreateUser:
 
         with admin_page.check_alert_message_and_accept("Failed to create user"):
             admin_page.create_user(new_user.username, new_user.password)
-        expect(admin_page.user_elements.filter(has_text=f"{new_user.username}USER")).to_be_hidden()
+        ui_user = admin_page.find_user_by_username(new_user.username)
+        assert not ui_user, "Found user in UI"
 
         user = api_manager.admin_steps.get_user_by_username(new_user.username)
         assert not user, "User was created on BE"

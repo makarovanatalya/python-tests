@@ -19,3 +19,7 @@ Implement API tests (using current framework) for the following features:
 * Can get their accounts info (if authorized)
 * Can get info about transactions for their accounts (if authorized)
 * Can change profile name (if authorized)
+
+
+# TASK ON IMPLEMENTING UI TESTS
+Cover the same features (keeping in mind current API coverage)
