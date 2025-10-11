@@ -7,14 +7,9 @@ from src.main.api.models.create_user import CreateUserRequest
 from src.main.ui.pages.admin_panel_page import AdminPanelPage
 
 
-@pytest.fixture(scope="function")
-def local_storage(api_manager):
-    return {"authToken": api_manager.user_steps.set_user(CreateUserRequest.get_admin()).get_auth_token()}
-
-
 @pytest.mark.ui
 class TestCreateUser:
-    def test_admin_can_create_user(self, new_context, new_page, api_manager: ApiManager):
+    def test_admin_can_create_user(self, new_context, new_page, api_manager: ApiManager, admin_session):
         new_user = RandomModelGenerator.generate(CreateUserRequest)
         admin_page = AdminPanelPage(new_page).open()
 
@@ -25,7 +20,11 @@ class TestCreateUser:
         user = api_manager.admin_steps.get_user_by_username(new_user.username)
         assert user, "User was not created on BE"
 
-    def test_admin_can_not_create_user_with_invalid_data(self, new_context, new_page,  api_manager: ApiManager):
+
+        print(len(api_manager.admin_steps.get_users()))
+        pass
+
+    def test_admin_can_not_create_user_with_invalid_data(self, new_context, new_page,  api_manager: ApiManager, admin_session):
         new_user = RandomModelGenerator.generate(CreateUserRequest)
         new_user.username = "a"
         admin_page = AdminPanelPage(new_page).open()

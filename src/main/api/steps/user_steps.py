@@ -2,7 +2,7 @@ from typing import List, Any
 
 from requests import Response
 
-from src.main.api.models.account import GetAccountsResponse, Account
+from src.main.api.models.account import Account
 from src.main.api.models.comparasion.model_assertions import ModelAssertions
 from src.main.api.models.create_account import CreateAccountResponse
 from src.main.api.models.create_user import CreateUserRequest
