@@ -34,3 +34,10 @@ class AdminSteps(BaseSteps):
             request_spec=RequestSpecs.admin_auth_spec(),
             response_spec=ResponseSpecs.entity_was_deleted(),
         ).delete(user_id)
+
+    def get_users(self):
+        return ValidatedCrudRequester(
+            endpoint=Endpoint.ADMIN_GET_USERS,
+            request_spec=RequestSpecs.admin_auth_spec(),
+            response_spec=ResponseSpecs.request_returns_ok(),
+        ).get().root

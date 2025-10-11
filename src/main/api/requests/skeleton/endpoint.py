@@ -12,6 +12,7 @@ from src.main.api.models.deposit_money import DepositMoneyRequest, DepositMoneyR
 from src.main.api.models.login_user import LoginUserRequest, LoginUserResponse
 from src.main.api.models.profile import ProfileRequest, ProfileResponse, Profile
 from src.main.api.models.transfer import TransferRequest, TransferResponse
+from src.main.api.models.user import GetUsersResponse
 
 
 @dataclass(frozen=True)
@@ -32,6 +33,13 @@ class Endpoint(Enum):
         request_model=None,
         response_model=None,
     )
+
+    ADMIN_GET_USERS = EndpointConfig(
+        url='/admin/users',
+        request_model=None,
+        response_model=GetUsersResponse,
+    )
+
 
     LOGIN_USER = EndpointConfig(
         url='/auth/login',

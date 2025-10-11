@@ -46,6 +46,17 @@ class UserSteps(BaseSteps):
         return login_response
 
     @_user_must_be_set
+    def get_auth_token(self):
+        login_request = LoginUserRequest(username=self.user.username, password=self.user.password)
+        login_response: Response = CrudRequester(
+            endpoint=Endpoint.LOGIN_USER,
+            request_spec=RequestSpecs.unauth_spec(),
+            response_spec=ResponseSpecs.request_returns_ok(),
+        ).post(login_request)
+        # return login_response.headers
+        return login_response.headers.get("Authorization")
+
+    @_user_must_be_set
     def create_account(self) -> CreateAccountResponse:
         create_account_response: CreateAccountResponse = ValidatedCrudRequester(
             endpoint=Endpoint.CREATE_ACCOUNT,
