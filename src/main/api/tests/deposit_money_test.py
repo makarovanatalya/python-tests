@@ -17,7 +17,7 @@ class TestDepositMoney:
     def test_deposit_money(
             self,  api_manager: ApiManager, user_request: CreateUserResponse, user_account: CreateAccountResponse, amount: float
     ) -> None:
-        deposit_response = api_manager.user_steps.deposit_money(user_account.id, amount)
+        deposit_response = api_manager.user_steps.fill_deposit_form(user_account.id, amount)
         assert user_account.balance + amount == deposit_response.balance, "Wrong balance after deposit"
 
         account = api_manager.user_steps.get_account_by_id(user_account.id)

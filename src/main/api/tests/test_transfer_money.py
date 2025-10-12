@@ -14,7 +14,7 @@ def prepare_sender(api_manager: ApiManager, user_account: CreateAccountResponse,
     max_deposit_amount = float(Config.get('maxDepositAmount'))
     while deposit_amount > 0:
         amount = max_deposit_amount if deposit_amount > max_deposit_amount else deposit_amount
-        api_manager.user_steps.deposit_money(user_account.id, amount)
+        api_manager.user_steps.fill_deposit_form(user_account.id, amount)
         deposit_amount -= amount
     return user_account
 

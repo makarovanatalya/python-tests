@@ -34,6 +34,14 @@ class BasePage(ABC):
             assert alert_message in self.current_alert_message
             dialog.value.accept()
 
+    def _handle_dialog(self, dialog):
+        """
+        uses as alternative for context manager check_alert_message_and_accept,
+        in cases when the manager isn't applicable for some reason
+        """
+        self.current_alert_message = dialog.message
+        dialog.dismiss()
+
     @staticmethod
     def get_page_elements(locator, page_element_class: Type[E]) -> List[E]:
         return [page_element_class(locator) for locator in locator.all()]
