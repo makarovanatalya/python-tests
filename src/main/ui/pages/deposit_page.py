@@ -25,6 +25,7 @@ class DepositPage(BasePage):
         return self.get_page_elements(self.account_options, AccountOption)
 
     def _get_account_by_number(self, account_number):
+        self.account_options.filter(has_text=account_number)  # check for needed account number
         account = [acc for acc in self._get_account_options() if acc.account_number == account_number]
         return account[0] if account else None
 

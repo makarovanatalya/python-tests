@@ -15,6 +15,8 @@ class BasePage(ABC):
         self.username_field = self.page.get_by_placeholder("Username")
         self.password_field = self.page.get_by_placeholder("Password")
 
+        self.name = self.page.locator(".user-name")
+
     @property
     @abstractmethod
     def url(self): ...
@@ -45,3 +47,9 @@ class BasePage(ABC):
     @staticmethod
     def get_page_elements(locator, page_element_class: Type[E]) -> List[E]:
         return [page_element_class(locator) for locator in locator.all()]
+
+    def check_name_is(self, name: str):
+        self.page.reload()
+        self.name.wait_for(state="visible")
+        assert self.name.text_content() == name, "Name is incorrect"
+        return self
