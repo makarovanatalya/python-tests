@@ -2,7 +2,7 @@ from typing import List, Any
 
 from requests import Response
 
-from src.main.api.models.account import GetAccountsResponse, Account
+from src.main.api.models.account import Account
 from src.main.api.models.comparasion.model_assertions import ModelAssertions
 from src.main.api.models.create_account import CreateAccountResponse
 from src.main.api.models.create_user import CreateUserRequest
@@ -44,6 +44,17 @@ class UserSteps(BaseSteps):
         ).post(login_request)
         ModelAssertions(self.user, login_response).match()
         return login_response
+
+    @_user_must_be_set
+    def get_auth_token(self):
+        login_request = LoginUserRequest(username=self.user.username, password=self.user.password)
+        login_response: Response = CrudRequester(
+            endpoint=Endpoint.LOGIN_USER,
+            request_spec=RequestSpecs.unauth_spec(),
+            response_spec=ResponseSpecs.request_returns_ok(),
+        ).post(login_request)
+        # return login_response.headers
+        return login_response.headers.get("Authorization")
 
     @_user_must_be_set
     def create_account(self) -> CreateAccountResponse:
@@ -123,16 +134,22 @@ class UserSteps(BaseSteps):
         ).update(update_profile_request)
 
     @_user_must_be_set
-    def get_accounts(self) -> GetAccountsResponse:
+    def get_accounts(self) -> List[Account]:
         return ValidatedCrudRequester(
             endpoint=Endpoint.GET_ACCOUNTS,
             request_spec=RequestSpecs.user_auth_spec(self.user.username, self.user.password),
             response_spec=ResponseSpecs.request_returns_ok(),
-        ).get()
+        ).get().root
 
     @_user_must_be_set
     def get_account_by_id(self, account_id: int) -> Account:
         accounts = self.get_accounts()
-        account = [acc for acc in accounts.root if acc.id == account_id]
+        account = [acc for acc in accounts if acc.id == account_id]
         assert len(account) == 1, f"Could not find account with id {account_id}"
         return account[0]
+
+    @_user_must_be_set
+    def get_account_by_account_number(self, account_number: str):
+        accounts = self.get_accounts()
+        account = [acc for acc in accounts if acc.accountNumber == account_number]
+        return account[0] if account else None

@@ -3,7 +3,7 @@ from typing import TypeVar, Optional
 
 import requests
 
-from src.main.api.configs.config import Config
+from src.main.configs.config import Config
 from src.main.api.models.base_model import BaseModel
 from src.main.api.requests.skeleton.http_request import HTTPRequest
 from src.main.api.requests.skeleton.interfaces.crud_end_interface import CrudEndpointInterface

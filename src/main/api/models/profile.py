@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from src.main.api.models.account import Account
 from src.main.api.models.base_model import BaseModel
@@ -6,7 +6,7 @@ from src.main.api.models.base_model import BaseModel
 
 class Profile(BaseModel):
     accounts: List[Account]
-    name: str
+    name: Optional[str]
     username: str
     password: str
     role: str

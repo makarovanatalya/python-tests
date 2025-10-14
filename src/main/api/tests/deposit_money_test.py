@@ -1,7 +1,7 @@
 import pytest
 
-from src.main.api.classes.api_manager import ApiManager
-from src.main.api.configs.config import Config
+from src.main.classes.api_manager import ApiManager
+from src.main.configs.config import Config
 from src.main.api.generators.random_data import RandomData
 from src.main.api.generators.random_model_generator import RandomModelGenerator
 from src.main.api.models.create_account import CreateAccountResponse

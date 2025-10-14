@@ -1,13 +1,11 @@
 import pytest
 
-from src.main.api.classes.api_manager import ApiManager
-from src.main.api.configs.config import Config
 from src.main.api.generators.random_data import RandomData
-from src.main.api.generators.random_model_generator import RandomModelGenerator
 from src.main.api.models.create_account import CreateAccountResponse
-from src.main.api.models.create_user import CreateUserResponse, CreateUserRequest
+from src.main.api.models.create_user import CreateUserResponse
 from src.main.api.models.transaction import TransactionType
-from src.main.api.steps.user_steps import UserSteps
+from src.main.classes.api_manager import ApiManager
+from src.main.configs.config import Config
 
 
 def prepare_sender(api_manager: ApiManager, user_account: CreateAccountResponse, deposit_amount: float):
@@ -17,13 +15,6 @@ def prepare_sender(api_manager: ApiManager, user_account: CreateAccountResponse,
         api_manager.user_steps.deposit_money(user_account.id, amount)
         deposit_amount -= amount
     return user_account
-
-def prepare_receiver(api_manager: ApiManager):
-    receiver_user = RandomModelGenerator.generate(CreateUserRequest)
-    api_manager.admin_steps.create_user(receiver_user)
-    receiver_user_steps = UserSteps(created_object=[]).set_user(receiver_user)
-    receiver_account = receiver_user_steps.create_account()
-    return receiver_account, receiver_user_steps
 
 @pytest.mark.api
 class TestTransferMoney:
@@ -37,9 +28,10 @@ class TestTransferMoney:
             user_request: CreateUserResponse,
             user_account: CreateAccountResponse,
             transfer_amount: float,
+            prepare_receiver
     ):
         sender_account = prepare_sender(api_manager, user_account, transfer_amount)
-        receiver_account, receiver_user_steps = prepare_receiver(api_manager)
+        receiver_account, receiver_user_steps = prepare_receiver
 
         # TRANSFER
         api_manager.user_steps.transfer_money(
@@ -69,11 +61,12 @@ class TestTransferMoney:
             api_manager: ApiManager,
             user_request: CreateUserResponse,
             user_account: CreateAccountResponse,
+            prepare_receiver
         ):
         deposit_amount = 1000
         transfer_amount = deposit_amount + RandomData.get_random_float(1,10)
         sender_account = prepare_sender(api_manager, user_account, deposit_amount)
-        receiver_account, receiver_user_steps = prepare_receiver(api_manager)
+        receiver_account, receiver_user_steps = prepare_receiver
 
         api_manager.user_steps.transfer_money_incorrectly(
                 sender_account_id=sender_account.id,
@@ -87,10 +80,11 @@ class TestTransferMoney:
             api_manager: ApiManager,
             user_request: CreateUserResponse,
             user_account: CreateAccountResponse,
+            prepare_receiver
         ):
         transfer_amount = float(Config.get('maxTransferAmount')) + RandomData.get_random_float(1,10)
         sender_account = prepare_sender(api_manager, user_account, transfer_amount)
-        receiver_account, receiver_user_steps = prepare_receiver(api_manager)
+        receiver_account, receiver_user_steps = prepare_receiver
         api_manager.user_steps.transfer_money_incorrectly(
                 sender_account_id=sender_account.id,
                 receiver_account_id=receiver_account.id,
@@ -114,10 +108,11 @@ class TestTransferMoney:
             api_manager: ApiManager,
             user_request: CreateUserResponse,
             user_account: CreateAccountResponse,
+            prepare_receiver
         ):
         transfer_amount = RandomData.get_random_float(1, float(Config.get('maxTransferAmount')))
         sender_account = prepare_sender(api_manager, user_account, transfer_amount)
-        receiver_account, receiver_user_steps = prepare_receiver(api_manager)
+        receiver_account, receiver_user_steps = prepare_receiver
         receiver_user_steps.transfer_money_incorrectly(
                 sender_account_id=sender_account.id,
                 receiver_account_id=receiver_account.id,
