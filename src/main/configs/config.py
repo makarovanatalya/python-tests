@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from typing import Any
 
@@ -21,5 +22,12 @@ class Config:
 
     @staticmethod
     def get(key: str, default_value: Any = None):
+        """
+        Return environment variable value is set (key = KEY), if not searches for key in config.properties
+        If nothing is found, returns default_value
+        """
+        env_value = os.environ.get(key.upper())
+        if env_value:
+            return env_value
         return Config()._properties.get(key, default_value)
 
