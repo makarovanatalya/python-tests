@@ -1,8 +1,8 @@
-DOCKER_USER =
-DOCKER_PASSWORD =
+DOCKER_USER ?=
+DOCKER_PASSWORD ?=
 IMAGE_NAME = $(DOCKER_USER)/python-test
 TAG = latest
-TEST_PROFILE ?= ui
+TEST_PROFILE ?= api
 TEST_OUTPUT_DIR = test-results/$(shell date +"%Y%_m_%d_%H_%M")
 DOCKER_COMPOSE_FILE = infra/docker-compose/docker-compose.yml
 
