@@ -21,3 +21,6 @@ jobs:
 
       - name: Lint code with Ruff
         run: ruff check --output-format=github
+
+      - name: Run app
+        run: make start-app
