@@ -2,16 +2,20 @@ FROM python:3.13-slim-bookworm
 
 ARG TEST_PROFILE=api
 ARG SERVER=http://localhost:4111/api
-ARG UI_BASE_URL=http://localhost:3000
+ARG UI_BASE_URL=http://localhost:80
 
 ENV TEST_PROFILE=${TEST_PROFILE}
 ENV SERVER=${SERVER}
 ENV UI_BASE_URL=${UI_BASE_URL}
 
+ENV PLAYWRIGHT_TEST_BASE_URL=${UI_BASE_URL}
+
 WORKDIR /app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && playwright install-deps
+RUN playwright install
 
 RUN mkdir -p logs
 
