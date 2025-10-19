@@ -1,5 +1,7 @@
+import allure
 from playwright.sync_api import Page
 
+from src.main.ui.helpers import screenshot
 from src.main.ui.pages.base_page import BasePage
 
 
@@ -15,7 +17,9 @@ class EditProfilePage(BasePage):
         return "/edit-profile"
 
     def change_name(self, name, message="Name updated successfully!"):
-        with self.check_alert_message_and_accept(message):
-            self.name_field.fill(name)
-            self.save_changes_button.click()
+        with allure.step(f"change name to {name}"):
+            with self.check_alert_message_and_accept(message):
+                self.name_field.fill(name)
+                self.save_changes_button.click()
+            screenshot.attach_page_screenshot(self.page, "change_name")
         return self

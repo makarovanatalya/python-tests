@@ -8,7 +8,7 @@ from src.main.ui.pages.edit_profile_page import EditProfilePage
 @pytest.mark.ui
 class TestChangeName:
     def test_user_can_change_name(self, new_context, new_page, api_manager: ApiManager, user_session):
-        name = RandomData.get_faker().name()
+        name = RandomData.get_name()
         EditProfilePage(new_page).open().change_name(name).check_name_is(name)
 
         assert api_manager.user_steps.get_profile().name == name, "Name did not change on BE"

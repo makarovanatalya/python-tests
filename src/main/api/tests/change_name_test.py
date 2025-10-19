@@ -9,7 +9,7 @@ from src.main.api.models.profile import ProfileRequest
 @pytest.mark.api
 class TestChangeName:
     def test_change_name(self, api_manager: ApiManager, user_request: CreateUserResponse):
-        name = RandomData.get_faker().name()
+        name = RandomData.get_faker().last_name() + " " + RandomData.get_faker().first_name()
         update_name_request = ProfileRequest(name=name)
         change_name_response = api_manager.user_steps.update_profile(update_name_request)
         assert change_name_response.customer.name == name
@@ -22,9 +22,9 @@ class TestChangeName:
         [
             "",                                                                             #empty
             RandomData.get_faker().last_name(),                                             # only first/last name
-            RandomData.get_faker().name() + RandomData.get_random_special_symbol(),         # with special symbol
-            f"{RandomData.get_faker().name()}{RandomData.get_faker().random_digit()}",      # with number
-            f"{RandomData.get_faker().name()} {RandomData.get_faker().first_name()}",       # 3 words
+            RandomData.get_name() + RandomData.get_random_special_symbol(),         # with special symbol
+            f"{RandomData.get_name()}{RandomData.get_faker().random_digit()}",      # with number
+            f"{RandomData.get_name()} {RandomData.get_faker().first_name()}",       # 3 words
             RandomData.get_faker().random_letter()*100,                                     # too long
         ]
     )

@@ -75,6 +75,7 @@ class TestTransferMoney:
                 error_text="Invalid transfer: insufficient funds or invalid accounts",
         )
 
+    @pytest.mark.skip(reason="limits removed")
     def test_transfer_money_beyond_limit(
             self,
             api_manager: ApiManager,
