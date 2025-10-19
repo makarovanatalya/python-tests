@@ -24,3 +24,9 @@ jobs:
 
       - name: Run app
         run: make start-app
+
+      - name: Run api test
+        run: TEST_PROFILE=api make run-docker-container
+
+      - name: Run ui test
+        run: TEST_PROFILE=ui make run-docker-container
