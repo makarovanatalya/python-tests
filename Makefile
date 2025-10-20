@@ -1,4 +1,4 @@
-DOCKER_USER ?=
+DOCKER_USER = unat9
 DOCKER_PASSWORD ?=
 IMAGE_NAME = $(DOCKER_USER)/python-test
 TAG = latest
