@@ -1,0 +1,5 @@
+POST /v1/accounts/transfer
+{'senderAccountId': 12, 'receiverAccountId': 13, 'amount': 1002.4077051387293}
+
+400
+Invalid transfer: insufficient funds or invalid accounts

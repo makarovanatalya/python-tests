@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":1,"username":"HTJs","password":"$2a$10$MxXDdWWvBZ.ve0OwVIi0M.JU50vBosBMP9Psq6FBoMDAdaJF.3kui","name":"Morrow Logan","role":"USER","accounts":[]}

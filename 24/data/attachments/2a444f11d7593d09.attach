@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"SbXG","password":"$2a$10$y6AXM0j4XsTA/YyfjKCSdODaoMBBrmnoKDjcc4NshN5c2j7snMlC2","name":"Tyler Fleming","role":"USER","accounts":[]}

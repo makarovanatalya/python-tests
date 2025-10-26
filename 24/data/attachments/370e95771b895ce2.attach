@@ -1,0 +1,5 @@
+DELETE /v1/admin/users/22
+
+
+200
+User with ID 22 deleted successfully.

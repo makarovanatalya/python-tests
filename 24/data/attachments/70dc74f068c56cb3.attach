@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":51,"username":"nMW7vPFxfu","password":"$2a$10$P6sI5mXnJdwM01dqoYjTTuhWK895hll8s.FywbtsiACk/9dXu/0Bu","name":"Amanda Li","role":"USER","accounts":[{"id":37,"accountNumber":"ACC37","balance":0.0,"transactions":[]}]}
