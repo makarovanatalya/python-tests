@@ -1,0 +1,5 @@
+GET /v1/admin/users
+None
+
+200
+[{"id":30,"username":"mgpm","password":"$2a$10$gfwl5Ox6g9dD7eFPOVbN8ukAQnC02kJvEjGcCbU3gz07HBoZdpgOy","name":null,"role":"USER","accounts":[]}]

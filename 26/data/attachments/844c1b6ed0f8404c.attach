@@ -1,0 +1,5 @@
+PUT /v1/customer/profile
+{'name': 'Alexis Robinson Matthew'}
+
+400
+Name must contain two words with letters only

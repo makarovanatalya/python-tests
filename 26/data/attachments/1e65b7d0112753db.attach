@@ -1,0 +1,5 @@
+PUT /v1/customer/profile
+{'name': 'William James'}
+
+200
+{"message":"Profile updated successfully","customer":{"id":26,"username":"Nks4JP","password":"$2a$10$MtA5lXw8JiM3AEZ8nf.zhuRNEtKJUWSqNqe6NklL0ylnCOs1ETOl2","name":"William James","role":"USER","accounts":[]}}

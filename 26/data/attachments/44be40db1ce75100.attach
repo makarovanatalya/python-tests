@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":28,"username":"lVzrIGS80EblXl0","password":"$2a$10$tGRhqJQauOBh9UBQxn1z4ePPRhFfFBfHjY3AtrxYI0KnYsxs32TaK","name":null,"role":"USER","accounts":[]}

@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":42,"username":"FKDA","password":"$2a$10$l0/A9Eb6OUZB1drJ8AadB.SMDCvIYlpdY9GoRfePXt9iaHHeewXFi","name":"Amanda Gomez","role":"USER","accounts":[{"id":28,"accountNumber":"ACC28","balance":0.0,"transactions":[]}]}

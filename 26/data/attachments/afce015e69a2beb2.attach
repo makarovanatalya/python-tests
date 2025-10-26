@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":36,"username":"3QHuphtz","password":"$2a$10$V27gazVy73muDWINUxlH1O6D5cV.PN69MgFnlSGtfHZKE4.Df/B32","name":"Tina Pierce","role":"USER","accounts":[{"id":22,"accountNumber":"ACC22","balance":0.0,"transactions":[]}]}

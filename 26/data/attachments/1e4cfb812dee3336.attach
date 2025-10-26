@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"nWVCmr5U","password":"$2a$10$HPNxAfzNI7zoMzyUkxBtjuqpxqXO/AnAsgqsw5z..6NROuXch2vjS","name":"Cheyenne Bryant","role":"USER","accounts":[]}
