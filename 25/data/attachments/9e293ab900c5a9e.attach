@@ -1,0 +1,5 @@
+POST /v1/admin/users
+{'username': 'GPAP', 'password': 'BMIffan278=+$', 'role': 'USER'}
+
+201
+{"id":21,"username":"GPAP","password":"$2a$10$8VE1aFpVql7Kx/A/Me1UTe7pwrjuSs4AHVTesDrA3cLHRk7fkZCoa","name":null,"role":"USER","accounts":[]}

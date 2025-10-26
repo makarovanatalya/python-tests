@@ -1,0 +1,5 @@
+POST /v1/accounts
+{'username': 'cSdn2gScT78gVS', 'password': 'PBKtcrz591&=&'}
+
+201
+{"id":9,"accountNumber":"ACC9","balance":0.0,"transactions":[]}

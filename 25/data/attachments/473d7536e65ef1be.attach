@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":49,"username":"pHk","password":"$2a$10$a59gF1zcbgSsyG94QIo.wOqvD5q1UTn6EQjAZ4wZM4vmCwTNfMtx.","name":"Carla Mendoza","role":"USER","accounts":[{"id":34,"accountNumber":"ACC34","balance":0.0,"transactions":[]}]}

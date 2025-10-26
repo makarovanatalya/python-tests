@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":45,"username":"klVb","password":"$2a$10$7tK4.5gP2KMUJsPL0q9nouVk1DA2EhuIU7agORf6mqBY8fS44PYCq","name":"Mackenzie Adkins","role":"USER","accounts":[{"id":30,"accountNumber":"ACC30","balance":0.0,"transactions":[]}]}
