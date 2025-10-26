@@ -1,0 +1,5 @@
+2025-10-26 21:22:27 INFO backend healthcheck
+2025-10-26 21:22:27 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-26 21:22:27 ERROR ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2025-10-26 21:22:28 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-26 21:22:28 DEBUG http://localhost:4111 "GET /api HTTP/1.1" 401 0
