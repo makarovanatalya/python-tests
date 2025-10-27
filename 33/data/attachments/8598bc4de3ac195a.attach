@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":36,"username":"Y94hos","password":"$2a$10$XPU.rdXu1IiC.zW6WpqTYegvFiHHdi4XuNBGrQB.umAIHzRcLPAV6","name":"Gibson Jimmy","role":"USER","accounts":[{"id":22,"accountNumber":"ACC22","balance":0.0,"transactions":[]}]}

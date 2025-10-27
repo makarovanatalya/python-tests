@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"nGqiiEW","password":"$2a$10$GzyP8o4mOtgE/zG3ELisqObE9pVs8gfdwuyYo/pyf56Dgn8toJkka","name":"Padilla Deanna","role":"USER","accounts":[]}

@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":45,"username":"Hw3Y1ES","password":"$2a$10$l0HWJlruKiNy9EzxYxrx2uVcx8uXRf2SHs9Z5z0.0ByRaUlyxozvO","name":"Rivers Rebecca","role":"USER","accounts":[{"id":31,"accountNumber":"ACC31","balance":0.0,"transactions":[]}]}
