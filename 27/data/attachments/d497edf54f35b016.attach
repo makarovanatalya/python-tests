@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":1,"username":"5FoyZlN","password":"$2a$10$918pK.dUsR4mpDQejZHmT.Uycacsz/ty9TW0uPnkc3.F7SRHDWPAW","name":"Johnson Dana","role":"USER","accounts":[]}

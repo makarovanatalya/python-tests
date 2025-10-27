@@ -1,0 +1,5 @@
+POST /v1/admin/users
+{'username': 'MDrr5', 'password': 'PEVxhxm502+$=', 'role': 'USER'}
+
+201
+{"id":17,"username":"MDrr5","password":"$2a$10$.I.M552SCep47d2tkTHDde0de7crlILbOgS3U8K6DVFu1jj0DIojq","name":null,"role":"USER","accounts":[]}

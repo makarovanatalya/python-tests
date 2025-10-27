@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"nwRjO96","password":"$2a$10$WKyAGRLL7fqVnbMMs4ovLOUXftwjemrR/tszcjhOLZBJB4m9p.mUK","name":"Megan Reyes","role":"USER","accounts":[]}

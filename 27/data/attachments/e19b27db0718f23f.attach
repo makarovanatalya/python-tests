@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":36,"username":"Vc0F9Qvi1aZAPb1","password":"$2a$10$9i6pEi5Od/MNhZg7GkICZOQdW8R/deuFPQ/ZoYq/KkyQTPkstjp2q","name":"James Rivera","role":"USER","accounts":[{"id":22,"accountNumber":"ACC22","balance":0.0,"transactions":[]}]}

@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":42,"username":"bOrFD2RCrJX5wI","password":"$2a$10$3Nu72CwR6q4Z2L46de4sHOdV51QGoEy9XRFRyCgWujLOsD7Pzs.um","name":"Stephanie Gonzalez","role":"USER","accounts":[{"id":27,"accountNumber":"ACC27","balance":0.0,"transactions":[]}]}
