@@ -1,0 +1,5 @@
+GET /v1/customer/accounts
+None
+
+200
+[{"id":33,"accountNumber":"ACC33","balance":0.0,"transactions":[]}]

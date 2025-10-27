@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"hOuD2ojWsre","password":"$2a$10$wzjQviZ3Ml9wVCVYlonR6ObOCV5uk1rt2b0FBfPgrct6J1YMHK9Lq","name":"Tucker Amber","role":"USER","accounts":[]}

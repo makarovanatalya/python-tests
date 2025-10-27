@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":1,"username":"GJH24AK0h6TDIrd","password":"$2a$10$ifj9ctLX6eZNx.r7SO0o5.EDTvUwuWImaY5pA4bsW4xssf7EW.DK6","name":"Mccarthy Ethan","role":"USER","accounts":[]}

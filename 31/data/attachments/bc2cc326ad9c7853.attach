@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":36,"username":"tq3fP0","password":"$2a$10$0b9jRbw3L7aXcQdYdg6PfOTAUt3ZFSQmepbTZDsyOp5r.bFFszSQa","name":"Hicks Jacob","role":"USER","accounts":[{"id":22,"accountNumber":"ACC22","balance":0.0,"transactions":[]}]}
