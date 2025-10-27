@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":36,"username":"dsJ9cyquy","password":"$2a$10$N2o8LXg6b0Ew8purveePy.Hv2AXa41LHDUStpYCOiJ3Igfko35IV2","name":"Duarte Benjamin","role":"USER","accounts":[{"id":22,"accountNumber":"ACC22","balance":0.0,"transactions":[]}]}

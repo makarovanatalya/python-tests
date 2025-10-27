@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":51,"username":"ChWUbrXSIP3Zekb","password":"$2a$10$TMHbF5hhaQwZ6.OYg8a1ceHKxtCdW.N8KEfctKvi8ns0c1l.5mjJK","name":"Brown Jennifer","role":"USER","accounts":[{"id":37,"accountNumber":"ACC37","balance":0.0,"transactions":[]}]}

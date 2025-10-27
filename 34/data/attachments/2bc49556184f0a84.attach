@@ -1,0 +1,5 @@
+POST /v1/accounts/transfer
+{'senderAccountId': 14, 'receiverAccountId': 15, 'amount': 5988.412193320811}
+
+200
+{"senderAccountId":14,"receiverAccountId":15,"amount":5988.412193320811,"message":"Transfer successful"}

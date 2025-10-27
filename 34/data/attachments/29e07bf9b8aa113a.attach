@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":38,"username":"qfcvr","password":"$2a$10$6pjN/h7zNGBzt9gdKa7KC.eo96k.nU69mFQFWj.GVE9W3mUhGDY7C","name":"Bradford Frederick","role":"USER","accounts":[{"id":24,"accountNumber":"ACC24","balance":0.0,"transactions":[]}]}

@@ -1,0 +1,5 @@
+POST /v1/accounts/deposit
+{'id': 16, 'balance': 2177.5565619236295}
+
+200
+{"id":16,"accountNumber":"ACC16","balance":2177.5565619236295,"transactions":[{"id":15,"amount":2177.5565619236295,"type":"DEPOSIT","timestamp":"Mon Oct 27 17:52:37 UTC 2025","relatedAccountId":16}]}

@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"xdbVE7c","password":"$2a$10$6nL2jpjpcKYCHHHlOb1yZ.K3tJhPUvr2zsMMnJY8qwnzwoxL6MVk.","name":"Robinson Tina","role":"USER","accounts":[]}

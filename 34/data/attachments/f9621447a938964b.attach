@@ -1,0 +1,5 @@
+POST /v1/admin/users
+{'username': 'YudinxuJQU1tT6i', 'password': 'FPSetes787=&&', 'role': 'USER'}
+
+201
+{"id":44,"username":"YudinxuJQU1tT6i","password":"$2a$10$rMmfzmMf//tCDHdH87fw2uIWrSj2s4iM0MTR0MP579VlgIPbUfaCq","name":null,"role":"USER","accounts":[]}

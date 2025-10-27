@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":42,"username":"KV4R2YV2QXQrjJL","password":"$2a$10$oxh66JkoC.cohyL7oMAQHuIbxcUGUPYPd.QAtEs1JzKxVkGalW6Zm","name":"Oconnor Andrea","role":"USER","accounts":[{"id":28,"accountNumber":"ACC28","balance":0.0,"transactions":[]}]}

@@ -1,0 +1,2 @@
+2025-10-27 17:52:28 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 17:52:29 DEBUG http://localhost:4111 "POST /api/v1/admin/users HTTP/1.1" 400 None

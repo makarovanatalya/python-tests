@@ -1,0 +1,5 @@
+POST /v1/accounts/deposit
+{'id': 8, 'balance': 791.9284488240914}
+
+403
+Unauthorized access to account
