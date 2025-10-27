@@ -1,0 +1,5 @@
+POST /v1/admin/users
+{'username': 'HCPp73plotmy', 'password': 'YZGnszx337#$#', 'role': 'USER'}
+
+201
+{"id":6,"username":"HCPp73plotmy","password":"$2a$10$jrOKzLYUSXKfpHoy2P8CIOynMVYIbzA9Unvfdd46jxJuSgHi4tcEG","name":null,"role":"USER","accounts":[]}

@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":42,"username":"pBOtUPwJ","password":"$2a$10$xWSZsXFkCJdZFOweQJh9sOfxf7opZ.wHwpA4jKjoEHv4UxtsXprKG","name":"Betty Curtis","role":"USER","accounts":[{"id":28,"accountNumber":"ACC28","balance":0.0,"transactions":[]}]}

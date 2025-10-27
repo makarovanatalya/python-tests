@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":1,"username":"wKp","password":"$2a$10$FKsXwYiCf0x8B3T5pHGTze.W63yfqFLN1a2kqpMt3r76o7C9Qc3Iu","name":"Lopez Tina","role":"USER","accounts":[]}

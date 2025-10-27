@@ -1,0 +1,5 @@
+GET /v1/customer/accounts
+None
+
+200
+[{"id":25,"accountNumber":"ACC25","balance":100.01,"transactions":[{"id":21,"amount":100.01,"type":"DEPOSIT","timestamp":"Mon Oct 27 13:04:59 UTC 2025","relatedAccountId":25}]}]
