@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":51,"username":"lZMRzElrln","password":"$2a$10$Gyni.VugvhD2pDcIO2pwWuSgrZL.1t9WjxzVqJHdxVwjYlLJ4PNMm","name":"Blair Nicole","role":"USER","accounts":[{"id":37,"accountNumber":"ACC37","balance":0.0,"transactions":[]}]}

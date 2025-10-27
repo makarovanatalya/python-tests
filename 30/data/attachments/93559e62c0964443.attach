@@ -1,0 +1,5 @@
+POST /v1/admin/users
+{'username': 'ab', 'password': '5cV!Lk79De', 'role': 'USER'}
+
+400
+{"username":["Username must be between 3 and 15 characters"]}

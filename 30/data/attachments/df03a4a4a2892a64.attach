@@ -1,0 +1,5 @@
+POST /v1/accounts/transfer
+{'senderAccountId': 16, 'receiverAccountId': 17, 'amount': 1441.4552997692454}
+
+403
+Unauthorized access to account

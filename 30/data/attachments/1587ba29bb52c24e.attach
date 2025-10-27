@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"I5NUAJ9VVnEjGsM","password":"$2a$10$WcEiTcLeT2ZDuB.96zfaS.8LFqa1vMs2ras7.05tYNy/Eit1ws6IC","name":"Miller Andrew","role":"USER","accounts":[]}

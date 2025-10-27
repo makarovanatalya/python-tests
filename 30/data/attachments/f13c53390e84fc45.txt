@@ -1,0 +1,15 @@
+2025-10-27 16:27:23 INFO backend healthcheck
+2025-10-27 16:27:23 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 16:27:23 ERROR ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2025-10-27 16:27:24 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 16:27:24 ERROR ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-10-27 16:27:25 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 16:27:25 DEBUG http://localhost:4111 "GET /api HTTP/1.1" 401 0
+2025-10-27 16:27:25 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 16:27:26 DEBUG http://localhost:4111 "POST /api/v1/admin/users HTTP/1.1" 201 None
+2025-10-27 16:27:26 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 16:27:26 DEBUG http://localhost:4111 "PUT /api/v1/customer/profile HTTP/1.1" 200 None
+2025-10-27 16:27:26 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 16:27:26 DEBUG http://localhost:4111 "GET /api/v1/customer/profile HTTP/1.1" 200 None
+2025-10-27 16:27:26 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-10-27 16:27:26 DEBUG http://localhost:4111 "DELETE /api/v1/admin/users/1 HTTP/1.1" 200 36
