@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"CjRBVJxXmuqb1G","password":"$2a$10$B/8lg42KRuUo0UeFHJqTjusSDdeacM9giflu2auHJWjs9KuK1fZn2","name":"Joanna Novak","role":"USER","accounts":[]}

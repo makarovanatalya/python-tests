@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":36,"username":"QB47J91j","password":"$2a$10$itbwu8PHhG9xiC1B0y7qseLQqWQHUjwsPAUWJj/nnCeuqxMMXkzAu","name":"Kelsey Myers","role":"USER","accounts":[{"id":22,"accountNumber":"ACC22","balance":0.0,"transactions":[]}]}
