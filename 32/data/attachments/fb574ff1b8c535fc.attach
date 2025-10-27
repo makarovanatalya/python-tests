@@ -1,0 +1,5 @@
+POST /v1/auth/login
+{'username': 'Oku60kT7ceXIaY', 'password': 'JQBrspc008!!%'}
+
+200
+{"username":"Oku60kT7ceXIaY","role":"USER"}

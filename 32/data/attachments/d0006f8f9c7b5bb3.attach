@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":42,"username":"tYlpVIfpsfJk2","password":"$2a$10$EUVpX5mw.gBN.Uy.Q.XttuHiKQy3yMUfwKM2Ax85mMqTrPAywlA2.","name":"Acevedo Brandon","role":"USER","accounts":[{"id":28,"accountNumber":"ACC28","balance":0.0,"transactions":[]}]}

@@ -1,0 +1,5 @@
+GET /v1/customer/accounts
+None
+
+200
+[{"id":8,"accountNumber":"ACC8","balance":0.0,"transactions":[{"id":3,"amount":0.780904482855999,"type":"DEPOSIT","timestamp":"Mon Oct 27 17:28:40 UTC 2025","relatedAccountId":8},{"id":4,"amount":0.780904482855999,"type":"TRANSFER_OUT","timestamp":"Mon Oct 27 17:28:41 UTC 2025","relatedAccountId":9}]}]

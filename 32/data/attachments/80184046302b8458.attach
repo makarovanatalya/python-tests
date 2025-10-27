@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":49,"username":"Pzmq","password":"$2a$10$yKE8Ee7e0srzDWRJJCzRf.qrL5cI9SDufWc1kPwwJ1V4aeKQGbYjC","name":"Oconnor Tamara","role":"USER","accounts":[{"id":35,"accountNumber":"ACC35","balance":0.0,"transactions":[]}]}

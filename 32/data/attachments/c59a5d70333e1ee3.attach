@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":45,"username":"hbYZQyHmS","password":"$2a$10$c1of./tEOafg7hSVBkN1TOPhm2uCk6lTAuxN3Tv/5WcR57slBwSw.","name":"Benitez Stacie","role":"USER","accounts":[{"id":31,"accountNumber":"ACC31","balance":0.0,"transactions":[]}]}

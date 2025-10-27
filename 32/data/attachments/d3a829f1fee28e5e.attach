@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":38,"username":"hMOEtOLc","password":"$2a$10$CYgfIvGu/QE82PQxk5VskumryfJWdDN.ygHULXDSXXXi.sPsqtP4m","name":"Salinas Ronald","role":"USER","accounts":[{"id":24,"accountNumber":"ACC24","balance":0.0,"transactions":[]}]}
