@@ -1,0 +1,10 @@
+2025-11-01 19:56:16 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:56:16 DEBUG http://localhost:4111 "POST /api/v1/admin/users HTTP/1.1" 201 None
+2025-11-01 19:56:16 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:56:17 DEBUG http://localhost:4111 "POST /api/v1/accounts HTTP/1.1" 201 None
+2025-11-01 19:56:17 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:56:17 DEBUG http://localhost:4111 "POST /api/v1/auth/login HTTP/1.1" 200 None
+2025-11-01 19:56:17 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:56:17 DEBUG http://localhost:4111 "GET /api/v1/customer/accounts HTTP/1.1" 200 None
+2025-11-01 19:56:17 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:56:17 DEBUG http://localhost:4111 "DELETE /api/v1/admin/users/40 HTTP/1.1" 200 37

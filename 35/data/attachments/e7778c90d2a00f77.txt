@@ -1,0 +1,11 @@
+2025-11-01 19:55:49 INFO backend healthcheck
+2025-11-01 19:55:49 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:55:49 DEBUG http://localhost:4111 "GET /api HTTP/1.1" 401 0
+2025-11-01 19:55:49 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:55:49 DEBUG http://localhost:4111 "POST /api/v1/admin/users HTTP/1.1" 201 None
+2025-11-01 19:55:49 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:55:49 DEBUG http://localhost:4111 "PUT /api/v1/customer/profile HTTP/1.1" 200 None
+2025-11-01 19:55:49 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:55:49 DEBUG http://localhost:4111 "GET /api/v1/customer/profile HTTP/1.1" 200 None
+2025-11-01 19:55:49 DEBUG Starting new HTTP connection (1): localhost:4111
+2025-11-01 19:55:50 DEBUG http://localhost:4111 "DELETE /api/v1/admin/users/1 HTTP/1.1" 200 36
