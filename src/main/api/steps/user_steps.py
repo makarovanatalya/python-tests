@@ -1,5 +1,6 @@
 from typing import List, Any
 
+import allure
 from requests import Response
 
 from src.main.api.models.account import Account
@@ -35,6 +36,7 @@ class UserSteps(BaseSteps):
         return wrapper
 
     @_user_must_be_set
+    @allure.step
     def login(self) -> LoginUserResponse:
         login_request = LoginUserRequest(username=self.user.username, password=self.user.password)
         login_response: LoginUserResponse = ValidatedCrudRequester(
@@ -46,6 +48,7 @@ class UserSteps(BaseSteps):
         return login_response
 
     @_user_must_be_set
+    @allure.step
     def get_auth_token(self):
         login_request = LoginUserRequest(username=self.user.username, password=self.user.password)
         login_response: Response = CrudRequester(
@@ -57,6 +60,7 @@ class UserSteps(BaseSteps):
         return login_response.headers.get("Authorization")
 
     @_user_must_be_set
+    @allure.step
     def create_account(self) -> CreateAccountResponse:
         create_account_response: CreateAccountResponse = ValidatedCrudRequester(
             endpoint=Endpoint.CREATE_ACCOUNT,
@@ -69,6 +73,7 @@ class UserSteps(BaseSteps):
         return create_account_response
 
     @_user_must_be_set
+    @allure.step
     def deposit_money(self, account_id: int, amount: float) -> DepositMoneyResponse:
         deposit_money_request: DepositMoneyRequest = DepositMoneyRequest(id=account_id, balance=amount)
         deposit_money_response: DepositMoneyResponse = ValidatedCrudRequester(
@@ -80,6 +85,7 @@ class UserSteps(BaseSteps):
         return deposit_money_response
 
     @_user_must_be_set
+    @allure.step
     def deposit_money_incorrectly(self, account_id: int, amount: float, error_text: str) -> Response:
         deposit_money_request: DepositMoneyRequest = DepositMoneyRequest(id=account_id, balance=amount)
         return CrudRequester(
@@ -89,6 +95,7 @@ class UserSteps(BaseSteps):
         ).post(model=deposit_money_request)
 
     @_user_must_be_set
+    @allure.step
     def transfer_money(self, sender_account_id: int, receiver_account_id: int, amount: float) -> TransferResponse:
         transfer_response: TransferResponse = ValidatedCrudRequester(
             endpoint=Endpoint.TRANSFER,
@@ -102,6 +109,7 @@ class UserSteps(BaseSteps):
         return transfer_response
 
     @_user_must_be_set
+    @allure.step
     def transfer_money_incorrectly(self, sender_account_id: int, receiver_account_id: int, amount: float, error_text: str) -> Response:
         return CrudRequester(
             endpoint=Endpoint.TRANSFER,
@@ -110,6 +118,7 @@ class UserSteps(BaseSteps):
         ).post(model=TransferRequest(senderAccountId=sender_account_id, receiverAccountId=receiver_account_id, amount=amount))
 
     @_user_must_be_set
+    @allure.step
     def get_profile(self) -> Profile:
         return ValidatedCrudRequester(
             endpoint=Endpoint.GET_PROFILE,
@@ -118,6 +127,7 @@ class UserSteps(BaseSteps):
         ).get()
 
     @_user_must_be_set
+    @allure.step
     def update_profile(self, update_profile_request: ProfileRequest) -> ProfileResponse:
         return ValidatedCrudRequester(
             endpoint=Endpoint.UPDATE_PROFILE,
@@ -126,6 +136,7 @@ class UserSteps(BaseSteps):
         ).update(update_profile_request)
 
     @_user_must_be_set
+    @allure.step
     def update_profile_with_invalid_data(self, update_profile_request: ProfileRequest, error_text: str) -> Response:
         return CrudRequester(
             endpoint=Endpoint.UPDATE_PROFILE,
@@ -134,6 +145,7 @@ class UserSteps(BaseSteps):
         ).update(update_profile_request)
 
     @_user_must_be_set
+    @allure.step
     def get_accounts(self) -> List[Account]:
         return ValidatedCrudRequester(
             endpoint=Endpoint.GET_ACCOUNTS,
@@ -142,6 +154,7 @@ class UserSteps(BaseSteps):
         ).get().root
 
     @_user_must_be_set
+    @allure.step
     def get_account_by_id(self, account_id: int) -> Account:
         accounts = self.get_accounts()
         account = [acc for acc in accounts if acc.id == account_id]
@@ -149,6 +162,7 @@ class UserSteps(BaseSteps):
         return account[0]
 
     @_user_must_be_set
+    @allure.step
     def get_account_by_account_number(self, account_number: str):
         accounts = self.get_accounts()
         account = [acc for acc in accounts if acc.accountNumber == account_number]

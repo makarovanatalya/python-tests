@@ -30,6 +30,6 @@ def prepare_receiver(api_manager: ApiManager):
     receiver_user = RandomModelGenerator.generate(CreateUserRequest)
     api_manager.admin_steps.create_user(receiver_user)
     receiver_user_steps = UserSteps(created_object=[]).set_user(receiver_user)
-    receiver_user_steps.update_profile(ProfileRequest(name=RandomData.get_faker().name()))
+    receiver_user_steps.update_profile(ProfileRequest(name=RandomData.get_name()))
     receiver_account = receiver_user_steps.create_account()
     return receiver_account, receiver_user_steps

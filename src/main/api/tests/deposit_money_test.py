@@ -53,6 +53,7 @@ class TestDepositMoney:
         api_manager.user_steps.deposit_money_incorrectly(user_account.id, amount, "Invalid account or amount")
         assert user_account.balance == api_manager.user_steps.get_account_by_id(user_account.id).balance, "Balance changed"
 
+    @pytest.mark.skip(reason="limits removed")
     def test_deposit_beyond_limit(
             self, api_manager: ApiManager, user_request: CreateUserRequest, user_account: CreateAccountResponse
     ) -> None:

@@ -1,5 +1,6 @@
 from http import HTTPMethod
 from typing import TypeVar, Optional
+import allure
 
 import requests
 
@@ -11,13 +12,18 @@ from src.main.api.requests.skeleton.interfaces.crud_end_interface import CrudEnd
 T = TypeVar('T', bound=BaseModel)
 
 class CrudRequester(HTTPRequest, CrudEndpointInterface):
+    @allure.step("send_http_request")
     def _send_request(self, method: HTTPMethod, endpoint: str, body: str = None) -> requests.Response:
-        self.request_spec.url = f"{Config.get('server')}{Config.get('api_version')}{self.endpoint.value.url}{endpoint}"
+        endpoint = f"{Config.get('api_version')}{self.endpoint.value.url}{endpoint}"
+        self.request_spec.url = f"{Config.get('server')}{endpoint}"
         self.request_spec.method = method
         self.request_spec.json = body
 
         with requests.Session() as session:
             response = session.send(session.prepare_request(self.request_spec))
+
+        attach_content = f"{method} {endpoint}\n{self.request_spec.json}\n\n{response.status_code}\n{response.text}"
+        allure.attach(attach_content, "request.txt")
         self.response_spec(response)
         return response
 

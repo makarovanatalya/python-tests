@@ -1,3 +1,6 @@
+import allure
+
+from src.main.ui.helpers import screenshot
 from src.main.ui.pages.base_page import BasePage
 from playwright.sync_api import Page
 
@@ -12,10 +15,9 @@ class LoginPage(BasePage):
         return "/login"
 
     def login(self, username: str, password: str):
-        self.username_field.fill(username)
-        self.password_field.fill(password)
-        self.login_button.click()
+        with allure.step(f"Login as {username}"):
+            self.username_field.fill(username)
+            self.password_field.fill(password)
+            self.login_button.click()
+            screenshot.attach_page_screenshot(self.page, "login")
         return self
-
-
-

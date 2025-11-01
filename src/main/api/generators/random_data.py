@@ -23,6 +23,10 @@ class RandomData:
         return ''.join(faker.random_letters(length=random.randint(3, 15)))
 
     @staticmethod
+    def get_name() -> str:
+        return f"{faker.last_name()} {faker.first_name()}"
+
+    @staticmethod
     def get_password() -> str:
         upper_letters = [letter.upper() for letter in faker.random_letters(length=3)]
         lower_letters = [letter.lower() for letter in faker.random_letters(length=3)]

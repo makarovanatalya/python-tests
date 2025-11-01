@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
+from typing import Self, TypeVar, Type, List
 
 from playwright.sync_api import Page
-from typing import Self, TypeVar, Type, List
 
 from src.main.ui.elements.account_option_element import AccountOption
 
