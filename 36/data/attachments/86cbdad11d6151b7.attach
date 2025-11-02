@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":51,"username":"EBh7aLVbgrhcaX","password":"$2a$10$ATSFdnB/4IOR/mNiO0AznuaFYKpnDXnvjqVTXiI4qROhZqSXpMory","name":"Barber Melanie","role":"USER","accounts":[{"id":37,"accountNumber":"ACC37","balance":0.0,"transactions":[]}]}

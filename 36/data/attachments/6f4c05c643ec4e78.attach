@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":45,"username":"lLqO","password":"$2a$10$l8p5QUpmiyVS9aaQNi6a8OCGfSqDftrBGiTYp/cZ28R94OlTwDxkK","name":"White Donald","role":"USER","accounts":[{"id":31,"accountNumber":"ACC31","balance":0.0,"transactions":[]}]}

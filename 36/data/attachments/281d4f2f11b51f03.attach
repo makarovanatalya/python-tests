@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":42,"username":"dCF1eEW","password":"$2a$10$jjbwJSrzFQeDixTQYGiQjOHh4XDSPuzyoICIFAZvQKEDKsAO.z8/.","name":"Fitzgerald Andrew","role":"USER","accounts":[{"id":28,"accountNumber":"ACC28","balance":0.0,"transactions":[]}]}

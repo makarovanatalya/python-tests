@@ -1,0 +1,5 @@
+GET /v1/admin/users
+None
+
+200
+[{"id":30,"username":"ArcUUdZs","password":"$2a$10$FP.SRgHZkg7wfDudMa30le0KbzLrzEKR9UdWzYSaFjQGKhrqB93Du","name":null,"role":"USER","accounts":[]}]

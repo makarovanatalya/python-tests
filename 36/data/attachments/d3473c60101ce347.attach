@@ -1,0 +1,5 @@
+GET /v1/admin/users
+None
+
+200
+[]
