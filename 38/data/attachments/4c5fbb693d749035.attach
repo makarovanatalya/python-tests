@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":27,"username":"DPU","password":"$2a$10$EwDPUQl8l6oa8Ip6fdNyqe606D5Nc3XIbmtab5yLf.ARoXqxR4oFi","name":"Campbell James","role":"USER","accounts":[]}

@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":49,"username":"VrQctb","password":"$2a$10$hnphyxvRY.kZMjtMvxceiOnL9UgGzXEsmY0zcj99JSA/dWTU0Z4Gm","name":"Hopkins Cynthia","role":"USER","accounts":[{"id":35,"accountNumber":"ACC35","balance":0.0,"transactions":[]}]}

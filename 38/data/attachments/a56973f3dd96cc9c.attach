@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":51,"username":"m4TSaAP8m8n","password":"$2a$10$pj4WPPIYorcEYxXi2/JjDui2LMhQqQt6gAyTwP37e.nBTbm9N1coq","name":"Reilly Danielle","role":"USER","accounts":[{"id":37,"accountNumber":"ACC37","balance":0.0,"transactions":[]}]}
