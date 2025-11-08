@@ -74,9 +74,10 @@ k8s-port-forward:
 .PHONY: k8s-start-monitoring
 k8s-start-monitoring:
 	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts || true
-	helm repo add elastic https://helm.elastic.co || true
+	helm repo add grafana https://grafana.github.io/helm-charts || true
 	helm repo update
 	helm upgrade --install monitoring prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f infra/kube/monitoring-values.yaml
+	helm upgrade --install loki grafana/loki-stack -n monitoring -f infra/kube/loki-values.yaml
 	kubectl create secret generic basic-backend-auth --from-literal=username=admin --from-literal=password=admin -n monitoring
 	kubectl apply -f infra/kube/spring-monitoring.yaml
 
