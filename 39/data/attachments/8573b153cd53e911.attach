@@ -1,0 +1,5 @@
+POST /v1/accounts/deposit
+{'id': 7, 'balance': -1.0}
+
+400
+Invalid account or amount

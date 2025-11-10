@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":51,"username":"JiNHpNB4z6","password":"$2a$10$anDjRYPdmw0UZA6vcmspGusH9WeoQ8LyRL/Sh8yGCatXxv1TbDiV.","name":"Figueroa Dawn","role":"USER","accounts":[{"id":37,"accountNumber":"ACC37","balance":0.0,"transactions":[]}]}

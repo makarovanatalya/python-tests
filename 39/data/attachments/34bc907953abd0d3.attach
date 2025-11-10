@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":1,"username":"pDGUP","password":"$2a$10$awTEvI4UqYJK.agFyI/fFeNHMfgcuLNEC4tLYgXOmdMg0znkpyBy2","name":"Stone Anthony","role":"USER","accounts":[]}

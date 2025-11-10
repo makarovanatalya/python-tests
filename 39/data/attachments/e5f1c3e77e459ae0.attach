@@ -1,0 +1,5 @@
+POST /v1/admin/users
+{'username': '@ababab', 'password': 'Tk0cM7Dp6&', 'role': 'USER'}
+
+400
+{"username":["Username must contain only letters, digits, dashes, underscores, and dots"]}

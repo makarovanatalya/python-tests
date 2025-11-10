@@ -1,0 +1,5 @@
+DELETE /v1/admin/users/13
+
+
+200
+User with ID 13 deleted successfully.

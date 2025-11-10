@@ -1,0 +1,5 @@
+GET /v1/customer/profile
+None
+
+200
+{"id":36,"username":"6ROLD","password":"$2a$10$Ybh4h.6dfr05SkFDLDTCWuu4Af5RhaZtMP0VDqaAmGbavi14lISGS","name":"Ramos Andrea","role":"USER","accounts":[{"id":22,"accountNumber":"ACC22","balance":0.0,"transactions":[]}]}
