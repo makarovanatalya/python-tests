@@ -1,0 +1,108 @@
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 5Gi
+  resources:
+    limits:
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  config:
+    auth_enabled: false
+    server:
+      http_listen_port: 3100
+    limits_config:
+      enforce_metric_name: false
+      reject_old_samples: true
+      reject_old_samples_max_age: 168h
+      max_entries_limit_per_query: 5000
+    ingester:
+      chunk_idle_period: 3m
+      chunk_block_size: 262144
+      chunk_retain_period: 1m
+    schema_config:
+      configs:
+      - from: 2020-10-24
+        store: boltdb-shipper
+        object_store: filesystem
+        schema: v11
+        index:
+          prefix: index_
+          period: 24h
+    storage_config:
+      boltdb_shipper:
+        active_index_directory: /data/loki/boltdb-shipper-active
+        cache_location: /data/loki/boltdb-shipper-cache
+        cache_ttl: 24h
+        shared_store: filesystem
+      filesystem:
+        directory: /data/loki/chunks
+
+promtail:
+  enabled: true
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+  config:
+    clients:
+      - url: http://loki:3100/loki/api/v1/push
+    snippets:
+      scrapeConfigs: |
+        - job_name: kubernetes-pods
+          kubernetes_sd_configs:
+            - role: pod
+          pipeline_stages:
+            - cri: {}
+            - json:
+                expressions:
+                  level: level
+                  logger: logger
+                  thread: thread
+            - labels:
+                level:
+                logger:
+                thread:
+          relabel_configs:
+            - source_labels:
+                - __meta_kubernetes_pod_controller_name
+              regex: ([0-9a-z-.]+?)(-[0-9a-f]{8,10})?
+              action: replace
+              target_label: __tmp_controller_name
+            - source_labels:
+                - __meta_kubernetes_pod_label_app
+              action: replace
+              target_label: app
+            - source_labels:
+                - __meta_kubernetes_pod_node_name
+              action: replace
+              target_label: node_name
+            - source_labels:
+                - __meta_kubernetes_namespace
+              action: replace
+              target_label: namespace
+            - source_labels:
+                - __meta_kubernetes_pod_name
+              action: replace
+              target_label: pod
+            - source_labels:
+                - __meta_kubernetes_pod_container_name
+              action: replace
+              target_label: container
+            - replacement: /var/log/pods/*$1/*.log
+              separator: /
+              source_labels:
+                - __meta_kubernetes_pod_uid
+                - __meta_kubernetes_pod_container_name
+              target_label: __path__
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_container_name
+              target_label: container_name
+
+grafana:
+  enabled: false

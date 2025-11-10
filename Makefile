@@ -47,3 +47,45 @@ start-app:
 .PHONY: run-tests
 run-tests:
 	pytest -v --log-level=DEBUG --log-cli-level=DEBUG --alluredir allure-results
+
+# K8S
+.PHONY: k8s-start
+k8s-start:
+	minikube start --driver=docker
+	helm upgrade --install nbank infra/kube/chart
+
+.PHONY: k8s-check-context
+k8s-check-context:
+	kubectl config current-context
+
+.PHONY: k8s-check-services
+k8s-check-services:
+	kubectl get svc
+	kubectl get pods
+
+.PHONY: k8s-check-logs
+k8s-check-logs:
+	 kubectl logs deployment/backend
+
+.PHONY: k8s-port-forfard
+k8s-port-forward:
+	 kubectl port-forward svc/frontend 3000:80
+
+.PHONY: k8s-start-monitoring
+k8s-start-monitoring:
+	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts || true
+	helm repo add grafana https://grafana.github.io/helm-charts || true
+	helm repo update
+	helm upgrade --install monitoring prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f infra/kube/monitoring-values.yaml
+	helm upgrade --install loki grafana/loki-stack -n monitoring -f infra/kube/loki-values.yaml
+	kubectl create secret generic basic-backend-auth --from-literal=username=admin --from-literal=password=admin -n monitoring
+	kubectl apply -f infra/kube/spring-monitoring.yaml
+
+.PHONY: k8s-stop
+k8s-stop:
+	kubectl delete -f infra/kube/spring-monitoring.yaml || true
+	kubectl delete secret basic-backend-auth -n monitoring || true
+	helm uninstall monitoring -n monitoring || true
+	kubectl delete namespace monitoring || true
+	helm uninstall nbank || true
+	minikube stop

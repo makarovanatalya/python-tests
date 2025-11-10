@@ -1,0 +1,33 @@
+grafana:
+  enabled: true
+  service:
+    type: NodePort
+  adminUser: admin
+  adminPassword: admin
+  sidecar:
+    dashboards:
+      enabled: true
+    datasources:
+      enabled: true
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki.monitoring.svc.cluster.local:3100
+      isDefault: false
+      editable: true
+
+prometheus:
+  service:
+    type: NodePort
+  prometheusSpec:
+    serviceMonitorSelector:
+      matchLabels:
+        release: monitoring
+    maximumStartupDurationSeconds: 600
+
+prometheus-node-explorer:
+  enabled: true
+
+kube-state-metrics:
+  enabled: true
